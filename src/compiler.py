@@ -1,5 +1,5 @@
 from comp import Comp
-from layer.layer import Layer
+from layer import Layer
 
 class Compiler:
     def __init__(self, comps: Comp):
@@ -7,8 +7,8 @@ class Compiler:
 
         self.js_script = ""
 
-    def __create_layer__(self, layer: Layer, comp: Comp):
-        pass
+    def __create_layer__(self, layer: Layer, comp_name: str):
+        print(comp_name)
 
     def __create_comp__(self, comp: Comp):
         self.js_script += f"app.project.items.addComp('{comp.name}');"
@@ -18,7 +18,7 @@ class Compiler:
             self.__create_comp__(comp)
 
             for layer in comp.layers:
-                pass
+                self.__create_layer__(layer, comp.name)
 
 
 

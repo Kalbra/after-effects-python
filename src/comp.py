@@ -1,4 +1,4 @@
-from layer.layer import Layer
+from layer import Layer
 
 class Comp:
     def __init__(self, name: str):

@@ -1,7 +1,14 @@
-import ae_script, comp
+import ae_script, comp, layer
+
 
 after_effects_script = ae_script.AEScript()
 
-after_effects_script.addComp(comp.Comp("helo"))
 
-after_effects_script.render()
+
+composition = comp.Comp("helo")
+composition.addLayer(layer.Layer("dsf"))
+composition.addLayer(layer.Layer("dsf"))
+
+after_effects_script.addComp(composition)
+
+after_effects_script.compile()
