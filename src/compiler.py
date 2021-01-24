@@ -10,8 +10,10 @@ class Compiler:
     def __create_layer__(self, layer: Layer, comp_name: str):
         print(comp_name)
 
+    # Creates a comp in javascript, it will add to js_script string.
     def __create_comp__(self, comp: Comp):
-        self.js_script += f"app.project.items.addComp('{comp.name}');"
+        self.js_script += f"app.project.items.addComp('{comp.name}, {comp.width}, {comp.height}, {comp.pixel_aspect}," \
+                          f" {comp.duration}, {comp.framerate}');"
 
     def compile(self):
         for comp in self.comp_list:
@@ -20,6 +22,4 @@ class Compiler:
             for layer in comp.layers:
                 self.__create_layer__(layer, comp.name)
 
-
-
-        print(self.js_script)
+        return self.js_script
