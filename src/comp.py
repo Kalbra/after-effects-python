@@ -13,7 +13,7 @@ class Comp:
     :parameter duration: The duration of the composition in seconds, a floating-point value in the range [0.0..10800.0].
     :parameter framerate: The frame rate of the composition, a floating-point value in the range [1.0..99.0].
     """
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         self.name: str = kwargs.get("name")
         self.width: int = kwargs.get("width", 1280)
         self.height: int = kwargs.get("height", 720)
@@ -21,8 +21,12 @@ class Comp:
         self.duration: float = kwargs.get("duration", 30.0)
         self.framerate: float = kwargs.get("framerate", 30.0)
 
+        print(kwargs["name"])
         # Layer list for the layers. At first empty, you can add a layer via addLayer()
         self.layers = []
+
+        # The variable name in javascript. The name is hashed.
+        self.js_variable_name = ""
 
     def addLayer(self, layer: Layer):
         self.layers.append(layer)

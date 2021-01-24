@@ -6,5 +6,5 @@ class Layer:
 
         self.start_time: float = 0
 
-
-
+        # The variable name in javascript. The name is hashed.
+        self.js_variable_name = ""
