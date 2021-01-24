@@ -1,7 +1,7 @@
 from comp import Comp
 from layer.layer import Layer
 
-class Render:
+class Compiler:
     def __init__(self, comps: Comp):
         self.comp_list = comps
 
@@ -13,7 +13,7 @@ class Render:
     def __create_comp__(self, comp: Comp):
         self.js_script += f"app.project.items.addComp('{comp.name}');"
 
-    def render(self):
+    def compile(self):
         for comp in self.comp_list:
             self.__create_comp__(comp)
 
