@@ -2,6 +2,7 @@ from comp import Comp
 from layer import Layer
 from soild_layer import SolidLayer
 import secrets
+from standalone_functions import *
 
 class Compiler:
     def __init__(self, comps: Comp):
@@ -10,27 +11,10 @@ class Compiler:
         self.js_script = ""
 
     """
-    The hash maker creates a hash for the variable name in javascript. By this code you can call the function. The 
-    code is javascript variable name save, so no syntax error can happen, cause a bad letter or character.
-    The hashing is important because if you have the following scenario:
-    
-    composition = comp.Comp(name="comp1")
-    composition.addLayer(layer.Layer("layer1"))
-    composition = comp.Comp(name="comp2")
-    composition.addLayer(layer.Layer("layer1"))
-    
-    The name "layer1" is dobbed, so the program doesn't work well, therefore the hash is used.
-    """
-    @staticmethod
-    def __hash_maker__():
-        return secrets.token_urlsafe(8).replace("0", "a").replace("1", "b").replace("2", "c").replace("3", "d").replace("4", "e").replace("5", "f").replace("6", "g").replace("7", "h").replace("8", "i").replace("9", "j").replace("-", "k").replace("_", "l")
-
-    """
     Compile the layers to javascript for after effects. The layer needs the comp variable(hashed value) to add a layer 
     to the comp. Also a layer variable will be created(hashed value)
     """
     def __create_layer__(self, layer, comp: Comp):
-        layer.js_variable_name = self.__hash_maker__()
         print(type(layer))
         # If the layer size isn't set the layer size is equal to the comp size.
         if layer.height or layer.width == None:
@@ -41,21 +25,30 @@ class Compiler:
         if layer.pixel_aspect == None:
             layer.pixel_aspect = comp.pixel_aspect
 
+        # If the duration is set it will be inserted into the js script if not the option will not be set, because the
+        # option is not required.
         if layer.duration != None:
             duration_string = f", {layer.duration}"
         else:
             duration_string = ""
 
+        # JS script for solid layer. To identify the type of the layer the class will be identified.
         if type(layer) == SolidLayer:
-            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addSolid([{layer.color.red}, {layer.color.green}, {layer.color.blue}], '{layer.name}', {layer.width}, {layer.height}, {layer.pixel_aspect}{duration_string});"
+            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addSolid([" \
+                              f"{layer.color.red}, {layer.color.green}, {layer.color.blue}], '{layer.name}', " \
+                              f"{layer.width}, {layer.height}, {layer.pixel_aspect}{duration_string});"
 
         else:
             raise ValueError("Class type is not in compiler list.")
+
+        # Adds properties to layer.
+        # Sets the position
+        self.js_script += f"{layer.js_variable_name}.position.setValue([{layer.x}, {layer.y}, {layer.z}]);"
+
     """
      Compile the comps to javascript for after effects. The variable name is hashed to prevent doubling 
     """
     def __create_comp__(self, comp: Comp):
-        comp.js_variable_name = self.__hash_maker__()
         self.js_script += f"var {comp.js_variable_name} = app.project.items.addComp('{comp.name}', {comp.width}, {comp.height}, {comp.pixel_aspect}, {comp.duration}, {comp.framerate});"
 
     def compile(self):

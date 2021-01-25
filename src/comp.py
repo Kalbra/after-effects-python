@@ -1,4 +1,5 @@
 from layer import Layer
+from standalone_functions import *
 
 class Comp:
     """
@@ -26,7 +27,7 @@ class Comp:
         self.layers = []
 
         # The variable name in javascript. The name is hashed.
-        self.js_variable_name = ""
+        self.js_variable_name = hash_maker()
 
     def addLayer(self, layer: Layer):
         self.layers.append(layer)
