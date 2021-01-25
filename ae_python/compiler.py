@@ -13,12 +13,6 @@ class Compiler:
     to the comp. Also a layer variable will be created(hashed value).
     """
     def __create_layer__(self, layer, comp: Comp):
-        print(type(layer))
-        # If the layer size isn't set the layer size is equal to the comp size.
-        if layer.height or layer.width == None:
-            layer.height = comp.height
-            layer.width  = comp.width
-
         # If the pixel aspect isn't set the layer the value is the same as in the comp
         if layer.pixel_aspect == None:
             layer.pixel_aspect = comp.pixel_aspect
@@ -26,8 +20,9 @@ class Compiler:
         # JS script for solid layer. To identify the type of the layer the class will be identified.
         if type(layer) == SolidLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addSolid([" \
-                              f"{layer.color.red}, "", 100,100,1);"
+                              f"{layer.color.red},{layer.color.green},{layer.color.blue}], {layer.name}, 100,100,1);"
 
+        # JS script for null layer.
         elif type(layer) == NullLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addNull();"
 
@@ -42,10 +37,40 @@ class Compiler:
         # Sets the name
         self.js_script += f"{layer.js_variable_name}.name = '{layer.name}';"
 
-        # Sets the size
-        self.js_script += f"{layer.js_variable_name}.width = {layer.width}"
-        self.js_script += f"{layer.js_variable_name}.height = {layer.height}"
+        # Sets the comment
+        if layer.comment != None:
+            self.js_script += f"{layer.js_variable_name}.comment = '{layer.comment}';"
 
+        # Sets the label
+        if layer.label != None:
+            self.js_script += f"{layer.js_variable_name}.label = {layer.label};"
+
+        # Sets if looked
+        if layer.locked:
+            self.js_script += f"{layer.js_variable_name}.locked = true;"
+
+        # Sets if shy
+        if layer.shy:
+            self.js_script += f"{layer.js_variable_name}.shy = true;"
+
+        # Sets if solo
+        if layer.solo:
+            self.js_script += f"{layer.js_variable_name}.solo = true;"
+
+        # Sets the start time
+        self.js_script += f"{layer.js_variable_name}.startTime = {layer.start_time};"
+
+        # Sets the stretch
+        if layer.stretch != None:
+            self.js_script += f"{layer.js_variable_name}.stretch = {layer.stretch};"
+
+        # Sets the in point
+        if layer.in_point != None:
+            self.js_script += f"{layer.js_variable_name}.inPoint = {layer.in_point}"
+
+        # Sets the out point
+        if layer.out_point != None:
+            self.js_script += f"{layer.js_variable_name}.outPoint = {layer.out_point}"
 
     """
      Compile the comps to javascript for after effects. The variable name is hashed to prevent doubling 

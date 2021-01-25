@@ -10,9 +10,6 @@ class Layer:
 
     :parameter position: The position of the layer(on the top left corner). Needs array in following style: [x, y, z]
 
-    :parameter width: The width of the solid in pixels, an integer in the range [4..30000].
-    :parameter height: The height of the solid in pixels, an integer in the range [4..30000].
-
     :parameter comment: A descriptive comment for the layer.
     :parameter label: The label color for the item. Colors are represented by their number (0 for None, or 1 to 16 for
                       one of the preset colors in the Labels preferences).
@@ -33,11 +30,8 @@ class Layer:
         self.name: str = kwargs.get("name")
 
         self.position: List[int] = kwargs.get("position", [0, 0, 0])
-        
-        self.width: int = kwargs.get("width")
-        self.height: int = kwargs.get("height")
 
-        self.comment: str = kwargs.get("comment", "")
+        self.comment: str = kwargs.get("comment")
         self.label: int = kwargs.get("label")
         self.locked: bool = kwargs.get("locked", False)
         self.shy: bool = kwargs.get("shy", False)
