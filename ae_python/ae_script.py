@@ -1,5 +1,6 @@
-from comp import Comp
-from compiler import Compiler
+from ae_python.comp import Comp
+from ae_python.compiler import Compiler
+import os
 
 """
 The AEScript class contains a script. You can add Comps by using addComp(), the comps contain layers where the 
@@ -30,7 +31,7 @@ class AEScript:
         js_respond = Compiler(self.comp_list).compile()
 
         # Add standard function at the first of the js_respond
-        js_respond = open("./js/std_functions.js", "r").read() + js_respond
+        js_respond = open(f"{os.path.dirname(__file__)}/js/std_functions.js", "r").read() + js_respond
 
         output_file = open("python_js_script.js", "w")
         output_file.write(js_respond)

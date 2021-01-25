@@ -1,5 +1,5 @@
 from colour import Color
-from layer import Layer
+from ae_python.layer.layer import Layer
 
 class SolidLayer(Layer):
     def __init__(self, *args, **kwargs):

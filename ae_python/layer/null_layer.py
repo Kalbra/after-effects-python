@@ -1,4 +1,4 @@
-from layer import Layer
+from ae_python.layer.layer import Layer
 
 class NullLayer(Layer):
     def __init__(self, *args, **kwargs):

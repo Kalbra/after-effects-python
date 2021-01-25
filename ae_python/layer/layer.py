@@ -1,5 +1,6 @@
 import time
-from standalone_functions import *
+from ae_python.standalone_functions import *
+
 class Layer:
     """
     The parent class for all layer types. Contains basic values.

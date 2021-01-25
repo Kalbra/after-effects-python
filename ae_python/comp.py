@@ -1,5 +1,5 @@
-from layer import Layer
-from standalone_functions import *
+from ae_python.layer.layer import Layer
+from ae_python.standalone_functions import *
 
 class Comp:
     """

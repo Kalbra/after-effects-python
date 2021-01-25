@@ -1,8 +1,6 @@
-from comp import Comp
-from layer import Layer
-from soild_layer import SolidLayer
-import secrets
-from standalone_functions import *
+from ae_python.comp import Comp
+from ae_python.layer.soild_layer import SolidLayer
+
 
 class Compiler:
     def __init__(self, comps: Comp):
