@@ -1,6 +1,7 @@
 from ae_python.comp import Comp
 from ae_python.layer.soild_layer import SolidLayer
 from ae_python.layer.null_layer import NullLayer
+from ae_python.layer.camera_layer import CameraLayer
 
 class Compiler:
     def __init__(self, comps: Comp):
@@ -25,6 +26,11 @@ class Compiler:
         # JS script for null layer.
         elif type(layer) == NullLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addNull();"
+
+        # JS script for camara layer.
+        elif type(layer) == CameraLayer:
+            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addCamera('', " \
+                              f"{layer.center_point});"
 
         else:
             raise ValueError("Class type is not in compiler list.")

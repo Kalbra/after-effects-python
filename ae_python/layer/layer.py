@@ -22,6 +22,7 @@ class Layer:
     :parameter stretch: The layer’s time stretch, expressed as a percentage. A value of 100 means no stretch. Values
                         between 0 and 1 are set to 1, and values between -1 and 0 (not including 0) are set to -1.
     :parameter duration: Optional, the length of a still layer in seconds, a floating-point value.
+    :parameter scale: The scale of the layer.
 
     :parameter in_point: The “in” point of the layer, expressed in composition time (seconds).
     :parameter out_point: The “out” point of the layer, expressed in composition time (seconds).
@@ -39,6 +40,7 @@ class Layer:
         self.start_time: float = kwargs.get("start_time", 0)
         self.stretch: float = kwargs.get("stretch")
         self.duration: float = kwargs.get("duration")
+        self.scale: float = kwargs.get("scale")
 
         self.in_point: float = kwargs.get("in_point")
         self.out_point: float = kwargs.get("out_point")
