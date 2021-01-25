@@ -17,7 +17,7 @@ class AEScript:
     """
     Add a comp class to the script. 
 
-    :parameter: Comp class that will be added to the script
+    :parameter: Comp class that will be added to the script.
     """
     def addComp(self, comp: Comp):
         self.comp_list.append(comp)

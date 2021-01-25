@@ -10,7 +10,7 @@ class Comp:
     :parameter width: The width of the composition in pixels, an integer in the range [4..30000].
     :parameter height: The height of the composition in pixels, an integer in the range [4..30000].
     :parameter pixel_aspect: The pixel aspect ratio of the composition, a floating-point value in the
-    range [0.01..100.0].
+                             range [0.01..100.0].
     :parameter duration: The duration of the composition in seconds, a floating-point value in the range [0.0..10800.0].
     :parameter framerate: The frame rate of the composition, a floating-point value in the range [1.0..99.0].
     """

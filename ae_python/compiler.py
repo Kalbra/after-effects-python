@@ -10,7 +10,7 @@ class Compiler:
 
     """
     Compile the layers to javascript for after effects. The layer needs the comp variable(hashed value) to add a layer 
-    to the comp. Also a layer variable will be created(hashed value)
+    to the comp. Also a layer variable will be created(hashed value).
     """
     def __create_layer__(self, layer, comp: Comp):
         print(type(layer))
