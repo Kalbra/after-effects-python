@@ -6,4 +6,5 @@ class SolidLayer(Layer):
         super().__init__(*args, **kwargs)
 
         self.color = kwargs.get("color", Color("black"))
+        self.pixel_aspect: float = kwargs.get("pixel_aspect")
 

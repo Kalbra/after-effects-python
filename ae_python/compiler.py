@@ -1,6 +1,6 @@
 from ae_python.comp import Comp
 from ae_python.layer.soild_layer import SolidLayer
-
+from ae_python.layer.null_layer import NullLayer
 
 class Compiler:
     def __init__(self, comps: Comp):
@@ -23,25 +23,29 @@ class Compiler:
         if layer.pixel_aspect == None:
             layer.pixel_aspect = comp.pixel_aspect
 
-        # If the duration is set it will be inserted into the js script if not the option will not be set, because the
-        # option is not required.
-        if layer.duration != None:
-            duration_string = f", {layer.duration}"
-        else:
-            duration_string = ""
-
         # JS script for solid layer. To identify the type of the layer the class will be identified.
         if type(layer) == SolidLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addSolid([" \
-                              f"{layer.color.red}, {layer.color.green}, {layer.color.blue}], '{layer.name}', " \
-                              f"{layer.width}, {layer.height}, {layer.pixel_aspect}{duration_string});"
+                              f"{layer.color.red}, "", 100,100,1);"
+
+        elif type(layer) == NullLayer:
+            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addNull();"
 
         else:
             raise ValueError("Class type is not in compiler list.")
 
         # Adds properties to layer.
         # Sets the position
-        self.js_script += f"{layer.js_variable_name}.position.setValue([{layer.x}, {layer.y}, {layer.z}]);"
+        self.js_script += f"{layer.js_variable_name}.position.setValue([{layer.position[0]}, {layer.position[1]}, " \
+                          f"{layer.position[2]}]);"
+
+        # Sets the name
+        self.js_script += f"{layer.js_variable_name}.name = '{layer.name}';"
+
+        # Sets the size
+        self.js_script += f"{layer.js_variable_name}.width = {layer.width}"
+        self.js_script += f"{layer.js_variable_name}.height = {layer.height}"
+
 
     """
      Compile the comps to javascript for after effects. The variable name is hashed to prevent doubling 
