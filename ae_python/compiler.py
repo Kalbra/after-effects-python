@@ -18,7 +18,8 @@ class Compiler:
         # JS script for solid layer. To identify the type of the layer the class will be identified.
         if type(layer) == SolidLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addSolid([" \
-                              f"{layer.color.red},{layer.color.green},{layer.color.blue}], '{layer.name}', 100,100,1);"
+                              f"{layer.color.red},{layer.color.green},{layer.color.blue}], '{layer.name}', " \
+                              f"{comp.width}, {comp.height},1);"
 
         # JS script for null layer.
         elif type(layer) == NullLayer:

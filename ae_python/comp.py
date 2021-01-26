@@ -18,7 +18,7 @@ class Comp:
         self.name: str = kwargs.get("name")
         self.width: int = kwargs.get("width", 1280)
         self.height: int = kwargs.get("height", 720)
-        self.pixel_aspect: float = kwargs.get("pixel_aspect", 1.78)
+        self.pixel_aspect: float = kwargs.get("pixel_aspect", 1)
         self.duration: float = kwargs.get("duration", 30.0)
         self.framerate: float = kwargs.get("framerate", 30.0)
 
