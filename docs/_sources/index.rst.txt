@@ -24,3 +24,28 @@ Layers
 ======
 .. automodule:: ae_python.layer.layer
    :members:
+
+Camera layer
+============
+.. automodule:: ae_python.layer.camera_layer
+   :members:
+
+Null layer
+==========
+.. automodule:: ae_python.layer.null_layer
+   :members:
+
+Shape layer
+===========
+.. automodule:: ae_python.layer.shape_layer
+   :members:
+
+Solid layer
+===========
+.. automodule:: ae_python.layer.solid_layer
+   :members:
+
+Text layer
+==========
+.. automodule:: ae_python.layer.text_layer
+   :members:

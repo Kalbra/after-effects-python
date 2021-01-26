@@ -101,6 +101,68 @@ between 0 and 1 are set to 1, and values between -1 and 0 (not including 0) are 
 </dd></dl>
 
 </div>
+<div class="section" id="module-ae_python.layer.camera_layer">
+<span id="camera-layer"></span><h1>Camera layer<a class="headerlink" href="#module-ae_python.layer.camera_layer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="ae_python.layer.camera_layer.CameraLayer">
+<em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.camera_layer.</code><code class="sig-name descname">CameraLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/camera_layer.html#CameraLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.camera_layer.CameraLayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The CameraLayer object represents a camera layer within a composition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zoom</strong> – The zoom factor of the camera.</p></li>
+<li><p><strong>center_point</strong> – The center of the new camera, a floating-point array [x, y]. This is used to set the
+initial x and y values of the new camera’s Point of Interest property. The z value is set to 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ae_python.layer.null_layer">
+<span id="null-layer"></span><h1>Null layer<a class="headerlink" href="#module-ae_python.layer.null_layer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="ae_python.layer.null_layer.NullLayer">
+<em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.null_layer.</code><code class="sig-name descname">NullLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/null_layer.html#NullLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.null_layer.NullLayer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ae_python.layer.shape_layer">
+<span id="shape-layer"></span><h1>Shape layer<a class="headerlink" href="#module-ae_python.layer.shape_layer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="ae_python.layer.shape_layer.TextLayer">
+<em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.shape_layer.</code><code class="sig-name descname">TextLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/shape_layer.html#TextLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.shape_layer.TextLayer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ae_python.layer.solid_layer">
+<span id="solid-layer"></span><h1>Solid layer<a class="headerlink" href="#module-ae_python.layer.solid_layer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="ae_python.layer.solid_layer.SolidLayer">
+<em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.solid_layer.</code><code class="sig-name descname">SolidLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/solid_layer.html#SolidLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.solid_layer.SolidLayer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ae_python.layer.text_layer">
+<span id="text-layer"></span><h1>Text layer<a class="headerlink" href="#module-ae_python.layer.text_layer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="ae_python.layer.text_layer.TextLayer">
+<em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.text_layer.</code><code class="sig-name descname">TextLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/text_layer.html#TextLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.text_layer.TextLayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The TextLayer object represents a text layer within a composition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> – The text of the text layer.</p></li>
+<li><p><strong>font_family</strong> – The font family of the text.</p></li>
+</ul>
+</dd>
+</dl>
+<p><span class="xref std std-ref">anchor text</span>
+:parameter font_size: The font size of the text. The unit is px. Note: The value is float.
+:parameter font_color: The text color, the argument class is Color.</p>
+</dd></dl>
+
+</div>
 
 
         </div>
@@ -127,6 +189,11 @@ between 0 and 1 are set to 1, and values between -1 and 0 (not including 0) are 
 <li><a class="reference internal" href="#">Welcome to After Effects Python’s documentation!</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#module-ae_python.layer.layer">Layers</a></li>
+<li><a class="reference internal" href="#module-ae_python.layer.camera_layer">Camera layer</a></li>
+<li><a class="reference internal" href="#module-ae_python.layer.null_layer">Null layer</a></li>
+<li><a class="reference internal" href="#module-ae_python.layer.shape_layer">Shape layer</a></li>
+<li><a class="reference internal" href="#module-ae_python.layer.solid_layer">Solid layer</a></li>
+<li><a class="reference internal" href="#module-ae_python.layer.text_layer">Text layer</a></li>
 </ul>
 </div>
   

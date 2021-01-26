@@ -1,7 +1,7 @@
 from ae_python.ae_script import *
 from ae_python.comp import *
 from ae_python.layer import layer
-from ae_python.layer.soild_layer import SolidLayer
+from ae_python.layer.solid_layer import SolidLayer
 from ae_python.layer.text_layer import TextLayer
 from colour import Color
 
