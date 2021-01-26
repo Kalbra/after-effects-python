@@ -80,8 +80,6 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – A string containing the name of the solid.</p></li>
 <li><p><strong>position</strong> – The position of the layer(on the top left corner). Needs array in following style: [x, y, z]</p></li>
-<li><p><strong>width</strong> – The width of the solid in pixels, an integer in the range [4..30000].</p></li>
-<li><p><strong>height</strong> – The height of the solid in pixels, an integer in the range [4..30000].</p></li>
 <li><p><strong>comment</strong> – A descriptive comment for the layer.</p></li>
 <li><p><strong>label</strong> – The label color for the item. Colors are represented by their number (0 for None, or 1 to 16 for
 one of the preset colors in the Labels preferences).</p></li>
@@ -94,6 +92,7 @@ panel.</p></li>
 <li><p><strong>stretch</strong> – The layer’s time stretch, expressed as a percentage. A value of 100 means no stretch. Values
 between 0 and 1 are set to 1, and values between -1 and 0 (not including 0) are set to -1.</p></li>
 <li><p><strong>duration</strong> – Optional, the length of a still layer in seconds, a floating-point value.</p></li>
+<li><p><strong>scale</strong> – The scale of the layer.</p></li>
 <li><p><strong>in_point</strong> – The “in” point of the layer, expressed in composition time (seconds).</p></li>
 <li><p><strong>out_point</strong> – The “out” point of the layer, expressed in composition time (seconds).</p></li>
 </ul>
