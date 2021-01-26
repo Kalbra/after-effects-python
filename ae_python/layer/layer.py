@@ -47,3 +47,11 @@ class Layer:
 
         # The variable name in javascript. The name is hashed.
         self.js_variable_name = hash_maker()
+
+    """
+    Returns the JS variable name. 
+    
+    :return: The JS variable name. Note: the variable name is hashed and not for user interaction.
+    """
+    def __str__(self):
+        return self.js_variable_name

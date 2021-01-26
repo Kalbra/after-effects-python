@@ -2,6 +2,7 @@ from ae_python.comp import Comp
 from ae_python.layer.soild_layer import SolidLayer
 from ae_python.layer.null_layer import NullLayer
 from ae_python.layer.camera_layer import CameraLayer
+from ae_python.layer.text_layer import TextLayer
 
 class Compiler:
     def __init__(self, comps: Comp):
@@ -14,14 +15,10 @@ class Compiler:
     to the comp. Also a layer variable will be created(hashed value).
     """
     def __create_layer__(self, layer, comp: Comp):
-        # If the pixel aspect isn't set the layer the value is the same as in the comp
-        if layer.pixel_aspect == None:
-            layer.pixel_aspect = comp.pixel_aspect
-
         # JS script for solid layer. To identify the type of the layer the class will be identified.
         if type(layer) == SolidLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addSolid([" \
-                              f"{layer.color.red},{layer.color.green},{layer.color.blue}], {layer.name}, 100,100,1);"
+                              f"{layer.color.red},{layer.color.green},{layer.color.blue}], '{layer.name}', 100,100,1);"
 
         # JS script for null layer.
         elif type(layer) == NullLayer:
@@ -31,6 +28,12 @@ class Compiler:
         elif type(layer) == CameraLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addCamera('', " \
                               f"{layer.center_point});"
+
+        # JS script for text layer.
+        elif type(layer) == TextLayer:
+            #self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addText('{layer.text}');{layer.js_variable_name}.text.sourceText.value.fontSize = {layer.font_size};{layer.js_variable_name}.text.sourceText.value.fillColor = [{layer.font_color.red},{layer.font_color.green},{layer.font_color.blue}];{layer.js_variable_name}.text.sourceText.value.font = '{layer.font_family}';"
+
+            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addText('{layer.text}');var {layer.js_text_variable_name} = {layer.js_variable_name}.text.sourceText.value;{layer.js_text_variable_name}.fontSize = {layer.font_size};{layer.js_text_variable_name}.fillColor = [{layer.font_color.red},{layer.font_color.green},{layer.font_color.blue}];{layer.js_text_variable_name}.font = '{layer.font_family}';{layer.js_variable_name}.text.sourceText.setValue({layer.js_text_variable_name});"
 
         else:
             raise ValueError("Class type is not in compiler list.")
@@ -50,10 +53,6 @@ class Compiler:
         # Sets the label
         if layer.label != None:
             self.js_script += f"{layer.js_variable_name}.label = {layer.label};"
-
-        # Sets if looked
-        if layer.locked:
-            self.js_script += f"{layer.js_variable_name}.locked = true;"
 
         # Sets if shy
         if layer.shy:
@@ -77,6 +76,10 @@ class Compiler:
         # Sets the out point
         if layer.out_point != None:
             self.js_script += f"{layer.js_variable_name}.outPoint = {layer.out_point}"
+
+        # Sets if looked. Note: Locked has to be on the end because after you lock a layer you cant edit it.
+        if layer.locked:
+            self.js_script += f"{layer.js_variable_name}.locked = true;"
 
     """
      Compile the comps to javascript for after effects. The variable name is hashed to prevent doubling 
