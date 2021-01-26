@@ -31,15 +31,22 @@ class Compiler:
 
         # JS script for text layer.
         elif type(layer) == TextLayer:
-            #self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addText('{layer.text}');{layer.js_variable_name}.text.sourceText.value.fontSize = {layer.font_size};{layer.js_variable_name}.text.sourceText.value.fillColor = [{layer.font_color.red},{layer.font_color.green},{layer.font_color.blue}];{layer.js_variable_name}.text.sourceText.value.font = '{layer.font_family}';"
-
-            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addText('{layer.text}');var {layer.js_text_variable_name} = {layer.js_variable_name}.text.sourceText.value;{layer.js_text_variable_name}.fontSize = {layer.font_size};{layer.js_text_variable_name}.fillColor = [{layer.font_color.red},{layer.font_color.green},{layer.font_color.blue}];{layer.js_text_variable_name}.font = '{layer.font_family}';{layer.js_variable_name}.text.sourceText.setValue({layer.js_text_variable_name});"
+            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addText('{layer.text}'" \
+                              f");var {layer.js_text_variable_name} = {layer.js_variable_name}.text.sourceText.value;" \
+                              f"{layer.js_text_variable_name}.fontSize = {layer.font_size};" \
+                              f"{layer.js_text_variable_name}.fillColor = [{layer.font_color.red}," \
+                              f"{layer.font_color.green},{layer.font_color.blue}];{layer.js_text_variable_name}.font" \
+                              f" = '{layer.font_family}';{layer.js_variable_name}.text.sourceText.setValue" \
+                              f"({layer.js_text_variable_name});"
 
         else:
             raise ValueError("Class type is not in compiler list.")
 
         # Adds properties to layer.
         # Sets the position
+        if layer.position == None:
+            layer.position = [comp.middle[0], comp.middle[1], 0]
+
         self.js_script += f"{layer.js_variable_name}.position.setValue([{layer.position[0]}, {layer.position[1]}, " \
                           f"{layer.position[2]}]);"
 

@@ -22,12 +22,15 @@ class Comp:
         self.duration: float = kwargs.get("duration", 30.0)
         self.framerate: float = kwargs.get("framerate", 30.0)
 
-        print(kwargs["name"])
         # Layer list for the layers. At first empty, you can add a layer via addLayer()
         self.layers = []
 
         # The variable name in javascript. The name is hashed.
-        self.js_variable_name = hash_maker()
+        self.js_variable_name:str  = hash_maker()
+
+        # Sets the middle point of the comp. It is a position, so [x,y].
+        self.middle: int = [self.width/2, self.height/2]
+
 
     def addLayer(self, layer: Layer):
         self.layers.append(layer)

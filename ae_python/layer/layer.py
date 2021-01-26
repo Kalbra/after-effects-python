@@ -30,7 +30,7 @@ class Layer:
     def __init__(self, *args, **kwargs):
         self.name: str = kwargs.get("name")
 
-        self.position: List[int] = kwargs.get("position", [0, 0, 0])
+        self.position: List[int] = kwargs.get("position")
 
         self.comment: str = kwargs.get("comment")
         self.label: int = kwargs.get("label")
@@ -46,7 +46,7 @@ class Layer:
         self.out_point: float = kwargs.get("out_point")
 
         # The variable name in javascript. The name is hashed.
-        self.js_variable_name = hash_maker()
+        self.js_variable_name: str = hash_maker()
 
     """
     Returns the JS variable name. 
