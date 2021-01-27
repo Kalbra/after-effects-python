@@ -94,6 +94,14 @@ class Compiler:
         if layer.getProperty('locked'):
             self.js_script += f"{layer.js_variable_name}.locked = true;"
 
+        #Keyframe compiler
+        for property in layer.properties:
+            property_name = property[0]
+
+            for value in property[1].value_stack:
+                #print(value)
+                pass
+
     """
      Compile the comps to javascript for after effects. The variable name is hashed to prevent doubling 
     """
