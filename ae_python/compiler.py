@@ -3,6 +3,7 @@ from ae_python.layer.solid_layer import SolidLayer
 from ae_python.layer.null_layer import NullLayer
 from ae_python.layer.camera_layer import CameraLayer
 from ae_python.layer.text_layer import TextLayer
+from ae_python.property import *
 
 class Compiler:
     def __init__(self, comps: Comp):
@@ -45,8 +46,9 @@ class Compiler:
 
         # Adds properties to layer.
         # Sets the position
-        if layer.position == None:
-            layer.position = [comp.middle[0], comp.middle[1], 0]
+
+        if layer.position.isNone():
+            layer.position = Property([comp.middle[0], comp.middle[1], 0])
 
         self.js_script += f"{layer.js_variable_name}.position.setValue([{layer.position[0]}, {layer.position[1]}, " \
                           f"{layer.position[2]}]);"

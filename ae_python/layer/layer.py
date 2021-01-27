@@ -1,5 +1,6 @@
 import time
 from ae_python.standalone_functions import *
+from ae_python.property import *
 from typing import List
 
 class Layer:
@@ -30,20 +31,24 @@ class Layer:
     def __init__(self, *args, **kwargs):
         self.name: str = kwargs.get("name")
 
-        self.position: List[int] = kwargs.get("position")
+        self.properties = []
 
-        self.comment: str = kwargs.get("comment")
-        self.label: int = kwargs.get("label")
-        self.locked: bool = kwargs.get("locked", False)
-        self.shy: bool = kwargs.get("shy", False)
-        self.solo: bool = kwargs.get("solo", False)
-        self.start_time: float = kwargs.get("start_time", 0)
-        self.stretch: float = kwargs.get("stretch")
-        self.duration: float = kwargs.get("duration")
-        self.scale: float = kwargs.get("scale")
+        self.properties.append(["position", Property(kwargs.get("position"))])
 
-        self.in_point: float = kwargs.get("in_point")
-        self.out_point: float = kwargs.get("out_point")
+        self.position = Property(kwargs.get("position"))
+
+        self.comment = Property(kwargs.get("comment"))
+        self.label = Property(kwargs.get("label"))
+        self.locked = Property(kwargs.get("locked", False))
+        self.shy = Property(kwargs.get("shy", False))
+        self.solo = Property(kwargs.get("solo", False))
+        self.start_time = Property(kwargs.get("start_time", 0))
+        self.stretch = Property(kwargs.get("stretch"))
+        self.duration = Property(kwargs.get("duration"))
+        self.scale = Property(kwargs.get("scale"))
+
+        self.in_point = Property(kwargs.get("in_point"))
+        self.out_point = Property(kwargs.get("out_point"))
 
         # The variable name in javascript. The name is hashed.
         self.js_variable_name: str = hash_maker()
@@ -55,3 +60,4 @@ class Layer:
     """
     def __str__(self):
         return self.js_variable_name
+
