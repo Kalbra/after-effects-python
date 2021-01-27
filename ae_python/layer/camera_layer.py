@@ -1,4 +1,5 @@
 from ae_python.layer.layer import Layer
+from ae_python.property import Property
 
 class CameraLayer(Layer):
     """
@@ -11,6 +12,6 @@ class CameraLayer(Layer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.zoom = kwargs.get("zoom")
-        self.center_point = kwargs.get("center_point")
+        self.properties.append(["zoom", Property(kwargs.get("zoom"))])
+        self.properties.append(["center_point", Property(kwargs.get("center_point"))])
 

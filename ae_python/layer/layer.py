@@ -35,23 +35,33 @@ class Layer:
 
         self.properties.append(["position", Property(kwargs.get("position"))])
 
-        self.position = Property(kwargs.get("position"))
+        self.properties.append(["comment", Property(kwargs.get("comment"))])
+        self.properties.append(["label", Property(kwargs.get("label"))])
+        self.properties.append(["locked", Property(kwargs.get("locked", False))])
+        self.properties.append(["shy", Property(kwargs.get("shy", False))])
+        self.properties.append(["solo", Property(kwargs.get("solo", False))])
+        self.properties.append(["start_time", Property(kwargs.get("start_time", 0))])
+        self.properties.append(["stretch", Property(kwargs.get("stretch"))])
+        self.properties.append(["duration", Property(kwargs.get("duration"))])
+        self.properties.append(["scale", Property(kwargs.get("scale"))])
 
-        self.comment = Property(kwargs.get("comment"))
-        self.label = Property(kwargs.get("label"))
-        self.locked = Property(kwargs.get("locked", False))
-        self.shy = Property(kwargs.get("shy", False))
-        self.solo = Property(kwargs.get("solo", False))
-        self.start_time = Property(kwargs.get("start_time", 0))
-        self.stretch = Property(kwargs.get("stretch"))
-        self.duration = Property(kwargs.get("duration"))
-        self.scale = Property(kwargs.get("scale"))
-
-        self.in_point = Property(kwargs.get("in_point"))
-        self.out_point = Property(kwargs.get("out_point"))
+        self.properties.append(["in_point", Property(kwargs.get("in_point"))])
+        self.properties.append(["out_point", Property(kwargs.get("out_point"))])
 
         # The variable name in javascript. The name is hashed.
         self.js_variable_name: str = hash_maker()
+
+    """
+    Gets a property of the layer by the name.
+    
+    :parameter name: The name of the property. 
+    
+    :returns: Returns a property pointer identified by the name of the property.  
+    """
+    def getProperty(self, name):
+        for property in self.properties:
+            if property[0] == name:
+                return property[1]
 
     """
     Returns the JS variable name. 
