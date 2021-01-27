@@ -68,11 +68,11 @@ class Compiler:
             self.js_script += f"{layer.js_variable_name}.label = {layer.getProperty('label')};"
 
         # Sets if shy
-        if layer.getProperty('shy'):
+        if layer.getProperty('shy') == 'True':
             self.js_script += f"{layer.js_variable_name}.shy = true;"
 
         # Sets if solo
-        if layer.getProperty('solo'):
+        if layer.getProperty('solo') == 'True':
             self.js_script += f"{layer.js_variable_name}.solo = true;"
 
         # Sets the start time
@@ -102,13 +102,8 @@ class Compiler:
                 property_time = value[0]
                 property_value = value[1]
 
-                # Sets the name
-                if property_name == "name":
-                    self.js_script += f"{layer.js_variable_name}.name.setValueAtTime({property_time}, " \
-                                      f"'{property_value}');"
-
                 # Sets the position
-                elif property_name == "position":
+                if property_name == "position":
                     self.js_script += f"{layer.js_variable_name}.position.setValueAtTime({property_time}, " \
                                       f"[{property_value[0]},{property_value[1]},{property_value[2]}]);"
 
