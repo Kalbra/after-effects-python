@@ -29,9 +29,9 @@ class Layer:
     :parameter out_point: The “out” point of the layer, expressed in composition time (seconds).
     """
     def __init__(self, *args, **kwargs):
-        self.name: str = kwargs.get("name")
-
         self.properties = []
+
+        self.properties.append(["name", Property(kwargs.get("name"))])
 
         self.properties.append(["position", Property(kwargs.get("position"))])
 
@@ -52,6 +52,14 @@ class Layer:
         self.js_variable_name: str = hash_maker()
 
     """
+    Returns the JS variable name. 
+
+    :return: The JS variable name. Note: the variable name is hashed and not for user interaction.
+    """
+    def __str__(self):
+        return self.js_variable_name
+
+    """
     Gets a property of the layer by the name.
     
     :parameter name: The name of the property. 
@@ -64,10 +72,21 @@ class Layer:
                 return property[1]
 
     """
-    Returns the JS variable name. 
+    Deletes a property by name. 
     
-    :return: The JS variable name. Note: the variable name is hashed and not for user interaction.
+    :parameter name: The name of the property. 
     """
-    def __str__(self):
-        return self.js_variable_name
+    def deleteProperty(self, name):
+        for i in range(len(self.properties)):
+            if self.properties[i][0] == name:
+                return self.properties.pop(i)
 
+    """
+    Sets a property by name. At first the method tries to delete the property to prevent property doubling 
+    
+    :parameter name: The property name you want to set.
+    :parameter property: The actual property, type is property class. 
+    """
+    def setProperty(self, name, property):
+        self.deleteProperty(name)
+        self.properties.append([name, property])

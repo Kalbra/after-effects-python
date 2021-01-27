@@ -19,8 +19,10 @@ class Compiler:
         # JS script for solid layer. To identify the type of the layer the class will be identified.
         if type(layer) == SolidLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addSolid([" \
-                              f"{layer.color.red},{layer.color.green},{layer.color.blue}], '{layer.name}', " \
-                              f"{comp.width}, {comp.height},1);"
+                              f"{layer.getProperty('color').default_value.red}," \
+                              f"{layer.getProperty('color').default_value.green}," \
+                              f"{layer.getProperty('color').default_value.blue}], '{layer.getProperty('name')}'," \
+                              f" {comp.width}, {comp.height},1);"
 
         # JS script for null layer.
         elif type(layer) == NullLayer:
@@ -29,66 +31,67 @@ class Compiler:
         # JS script for camara layer.
         elif type(layer) == CameraLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addCamera('', " \
-                              f"{layer.center_point});"
+                              f"{layer.getProperty('center_point')});"
 
         # JS script for text layer.
         elif type(layer) == TextLayer:
-            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addText('{layer.text}'" \
-                              f");var {layer.js_text_variable_name} = {layer.js_variable_name}.text.sourceText.value;" \
-                              f"{layer.js_text_variable_name}.fontSize = {layer.font_size};" \
-                              f"{layer.js_text_variable_name}.fillColor = [{layer.font_color.red}," \
-                              f"{layer.font_color.green},{layer.font_color.blue}];{layer.js_text_variable_name}.font" \
-                              f" = '{layer.font_family}';{layer.js_variable_name}.text.sourceText.setValue" \
-                              f"({layer.js_text_variable_name});"
+            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addText('" \
+                              f"{layer.getProperty('text')}');var {layer.js_text_variable_name} = " \
+                              f"{layer.js_variable_name}.text.sourceText.value;{layer.js_text_variable_name}.fontSize" \
+                              f" = {layer.getProperty('font_size')};{layer.js_text_variable_name}.fillColor = " \
+                              f"[{layer.getProperty('font_color').default_value.red}," \
+                              f"{layer.getProperty('font_color').default_value.green}," \
+                              f"{layer.getProperty('font_color').default_value.blue}];{layer.js_text_variable_name}" \
+                              f".font = '{layer.getProperty('font_family')}';{layer.js_variable_name}" \
+                              f".text.sourceText.setValue({layer.js_text_variable_name});"
 
         else:
             raise ValueError("Class type is not in compiler list.")
 
-        # Adds properties to layer.
+        # Adds default properties to layer.
         # Sets the position
+        if layer.getProperty('position').isNone():
+            layer.setProperty('position', Property([comp.middle[0], comp.middle[1], 0]))
 
-        if layer.position.isNone():
-            layer.position = Property([comp.middle[0], comp.middle[1], 0])
-
-        self.js_script += f"{layer.js_variable_name}.position.setValue([{layer.position[0]}, {layer.position[1]}, " \
-                          f"{layer.position[2]}]);"
+        self.js_script += f"{layer.js_variable_name}.position.setValue([{layer.getProperty('position')[0]}, " \
+                          f"{layer.getProperty('position')[1]}, {layer.getProperty('position')[2]}]);"
 
         # Sets the name
-        self.js_script += f"{layer.js_variable_name}.name = '{layer.name}';"
+        self.js_script += f"{layer.js_variable_name}.name = '{layer.getProperty('name')}';"
 
         # Sets the comment
-        if layer.comment != None:
-            self.js_script += f"{layer.js_variable_name}.comment = '{layer.comment}';"
+        if not layer.getProperty('comment').isNone():
+            self.js_script += f"{layer.js_variable_name}.comment = '{layer.getProperty('comment')}';"
 
         # Sets the label
-        if layer.label != None:
-            self.js_script += f"{layer.js_variable_name}.label = {layer.label};"
+        if not layer.getProperty('label').isNone():
+            self.js_script += f"{layer.js_variable_name}.label = {layer.getProperty('label')};"
 
         # Sets if shy
-        if layer.shy:
+        if layer.getProperty('shy'):
             self.js_script += f"{layer.js_variable_name}.shy = true;"
 
         # Sets if solo
-        if layer.solo:
+        if layer.getProperty('solo'):
             self.js_script += f"{layer.js_variable_name}.solo = true;"
 
         # Sets the start time
-        self.js_script += f"{layer.js_variable_name}.startTime = {layer.start_time};"
+        self.js_script += f"{layer.js_variable_name}.startTime = {layer.getProperty('start_time')};"
 
         # Sets the stretch
-        if layer.stretch != None:
-            self.js_script += f"{layer.js_variable_name}.stretch = {layer.stretch};"
+        if not layer.getProperty('stretch').isNone():
+            self.js_script += f"{layer.js_variable_name}.stretch = {layer.getProperty('stretch')};"
 
         # Sets the in point
-        if layer.in_point != None:
-            self.js_script += f"{layer.js_variable_name}.inPoint = {layer.in_point}"
+        if not layer.getProperty('in_point').isNone():
+            self.js_script += f"{layer.js_variable_name}.inPoint = {layer.getProperty('in_point')}"
 
         # Sets the out point
-        if layer.out_point != None:
-            self.js_script += f"{layer.js_variable_name}.outPoint = {layer.out_point}"
+        if not layer.getProperty('out_point').isNone():
+            self.js_script += f"{layer.js_variable_name}.outPoint = {layer.getProperty('out_point')}"
 
         # Sets if looked. Note: Locked has to be on the end because after you lock a layer you cant edit it.
-        if layer.locked:
+        if layer.getProperty('locked'):
             self.js_script += f"{layer.js_variable_name}.locked = true;"
 
     """

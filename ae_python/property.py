@@ -24,7 +24,8 @@ class Property:
     :returns: Element of array, identified by number like normal.
     """
     def __getitem__(self, item):
-        return self.default_value[item]
+        print(item)
+        return self.default_value[int(item)]
 
     """
     This method checks if a value.
@@ -32,6 +33,7 @@ class Property:
     :returns: True if the value is none else false.
     """
     def isNone(self):
+        print("hello")
         if self.default_value == None:
             return True
         else:
