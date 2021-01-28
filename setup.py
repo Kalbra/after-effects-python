@@ -4,7 +4,7 @@ setup(
     name='ae_python',
     version='1.0.0',
     author='Kalle Bracht',
-    author_email='kalle.bracht@outlook.de',
+    author_email='kalle.bracht@picoballoon.org',
     packages=["ae_python"],
     url="https://kalbra.github.io/after-effects-python/index.html",
     license='LICENSE',

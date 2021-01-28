@@ -1,7 +1,7 @@
 from ae_python.layer.layer import Layer
 from ae_python.standalone_functions import hash_maker
 from colour import Color
-
+from ae_python.property import Property
 
 class TextLayer(Layer):
     """
@@ -16,10 +16,10 @@ class TextLayer(Layer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.text: str = kwargs.get("text", "Hello World!")
-        self.font_family: float = kwargs.get("font_family", "Arial")
-        self.font_size: int = kwargs.get("font_size", 14)
-        self.font_color: Color = kwargs.get("font_color", Color("black"))
+        self.properties.append(["text", Property(kwargs.get("text", "Hello World!"))])
+        self.properties.append(["font_family", Property(kwargs.get("font_family", "Arial"))])
+        self.properties.append(["font_size", Property(kwargs.get("font_size", 14))])
+        self.properties.append(["font_color", Property(kwargs.get("font_color", Color("white")))])
 
         # The text document variable name. Need for the compiler.
         self.js_text_variable_name = hash_maker()

@@ -1,5 +1,6 @@
 import time
 from ae_python.standalone_functions import *
+from ae_python.property import *
 from typing import List
 
 class Layer:
@@ -28,30 +29,64 @@ class Layer:
     :parameter out_point: The “out” point of the layer, expressed in composition time (seconds).
     """
     def __init__(self, *args, **kwargs):
-        self.name: str = kwargs.get("name")
+        self.properties = []
 
-        self.position: List[int] = kwargs.get("position")
+        self.properties.append(["name", Property(kwargs.get("name"))])
 
-        self.comment: str = kwargs.get("comment")
-        self.label: int = kwargs.get("label")
-        self.locked: bool = kwargs.get("locked", False)
-        self.shy: bool = kwargs.get("shy", False)
-        self.solo: bool = kwargs.get("solo", False)
-        self.start_time: float = kwargs.get("start_time", 0)
-        self.stretch: float = kwargs.get("stretch")
-        self.duration: float = kwargs.get("duration")
-        self.scale: float = kwargs.get("scale")
+        self.properties.append(["position", Property(kwargs.get("position"))])
 
-        self.in_point: float = kwargs.get("in_point")
-        self.out_point: float = kwargs.get("out_point")
+        self.properties.append(["comment", Property(kwargs.get("comment"))])
+        self.properties.append(["label", Property(kwargs.get("label"))])
+        self.properties.append(["locked", Property(kwargs.get("locked", False))])
+        self.properties.append(["shy", Property(kwargs.get("shy", False))])
+        self.properties.append(["solo", Property(kwargs.get("solo", False))])
+        self.properties.append(["start_time", Property(kwargs.get("start_time", 0))])
+        self.properties.append(["stretch", Property(kwargs.get("stretch"))])
+        self.properties.append(["duration", Property(kwargs.get("duration"))])
+        self.properties.append(["scale", Property(kwargs.get("scale"))])
+
+        self.properties.append(["in_point", Property(kwargs.get("in_point"))])
+        self.properties.append(["out_point", Property(kwargs.get("out_point"))])
 
         # The variable name in javascript. The name is hashed.
         self.js_variable_name: str = hash_maker()
 
     """
     Returns the JS variable name. 
-    
+
     :return: The JS variable name. Note: the variable name is hashed and not for user interaction.
     """
     def __str__(self):
         return self.js_variable_name
+
+    """
+    Gets a property of the layer by the name.
+    
+    :parameter name: The name of the property. 
+    
+    :returns: Returns a property pointer identified by the name of the property.  
+    """
+    def getProperty(self, name):
+        for property in self.properties:
+            if property[0] == name:
+                return property[1]
+
+    """
+    Deletes a property by name. 
+    
+    :parameter name: The name of the property. 
+    """
+    def deleteProperty(self, name):
+        for i in range(len(self.properties)):
+            if self.properties[i][0] == name:
+                return self.properties.pop(i)
+
+    """
+    Sets a property by name. At first the method tries to delete the property to prevent property doubling 
+    
+    :parameter name: The property name you want to set.
+    :parameter property: The actual property, type is property class. 
+    """
+    def setProperty(self, name, property):
+        self.deleteProperty(name)
+        self.properties.append([name, property])
