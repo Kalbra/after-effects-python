@@ -21,6 +21,8 @@ class Comp:
         self.pixel_aspect: float = kwargs.get("pixel_aspect", 1)
         self.duration: float = kwargs.get("duration", 30.0)
         self.framerate: float = kwargs.get("framerate", 30.0)
+        self.label: int = kwargs.get("label", 1)
+        self.comment: str = kwargs.get("comment")
 
         # Layer list for the layers. At first empty, you can add a layer via addLayer()
         self.layers = []
@@ -31,6 +33,10 @@ class Comp:
         # Sets the middle point of the comp. It is a position, so [x,y].
         self.middle: int = [self.width/2, self.height/2]
 
-
+    """
+    Adds a layer to the comp.
+    
+    :parameter layer: The layer you want to add.
+    """
     def addLayer(self, layer: Layer):
         self.layers.append(layer)
