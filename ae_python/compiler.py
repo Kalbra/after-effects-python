@@ -56,6 +56,9 @@ class Compiler:
         self.js_script += f"{layer.js_variable_name}.position.setValue([{layer.getProperty('position')[0]}, " \
                           f"{layer.getProperty('position')[1]}, {layer.getProperty('position')[2]}]);"
 
+        # Sets the rotation
+        self.js_script += f"{layer.js_variable_name}.rotation = {layer.getProperty('rotation')};"
+
         # Sets the name
         self.js_script += f"{layer.js_variable_name}.name = '{layer.getProperty('name')}';"
 
@@ -91,7 +94,7 @@ class Compiler:
             self.js_script += f"{layer.js_variable_name}.outPoint = {layer.getProperty('out_point')}"
 
         # Sets if looked. Note: Locked has to be on the end because after you lock a layer you cant edit it.
-        if layer.getProperty('locked'):
+        if layer.getProperty('locked') == 'True':
             self.js_script += f"{layer.js_variable_name}.locked = true;"
 
         # Keyframe compiler

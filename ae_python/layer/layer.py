@@ -9,7 +9,8 @@ class Layer:
 
     :parameter name: A string containing the name of the solid.
 
-    :parameter position: The position of the layer(on the top left corner). Needs array in following style: [x, y, z]
+    :parameter position: The position of the layer. Needs array in following style: [x, y, z]
+    :parameter rotation: The rotation of the layer. Needs array in following style: [x, y, z]
 
     :parameter comment: A descriptive comment for the layer.
     :parameter label: The label color for the item. Colors are represented by their number (0 for None, or 1 to 16 for
@@ -34,6 +35,7 @@ class Layer:
         self.properties.append(["name", Property(kwargs.get("name"))])
 
         self.properties.append(["position", Property(kwargs.get("position"))])
+        self.properties.append(["rotation", Property(kwargs.get("rotation", 0))])
 
         self.properties.append(["comment", Property(kwargs.get("comment"))])
         self.properties.append(["label", Property(kwargs.get("label"))])
