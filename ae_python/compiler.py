@@ -68,11 +68,11 @@ class Compiler:
             self.js_script += f"{layer.js_variable_name}.label = {layer.getProperty('label')};"
 
         # Sets if shy
-        if layer.getProperty('shy'):
+        if layer.getProperty('shy') == 'True':
             self.js_script += f"{layer.js_variable_name}.shy = true;"
 
         # Sets if solo
-        if layer.getProperty('solo'):
+        if layer.getProperty('solo') == 'True':
             self.js_script += f"{layer.js_variable_name}.solo = true;"
 
         # Sets the start time
@@ -94,11 +94,53 @@ class Compiler:
         if layer.getProperty('locked'):
             self.js_script += f"{layer.js_variable_name}.locked = true;"
 
+        # Keyframe compiler
+        for property in layer.properties:
+            property_name = property[0]
+
+            for value in property[1].value_stack:
+                property_time = value[0]
+                property_value = value[1]
+
+                # Sets the position
+                if property_name == "position":
+                    self.js_script += f"{layer.js_variable_name}.position.setValueAtTime({property_time}, " \
+                                      f"[{property_value[0]},{property_value[1]},{property_value[2]}]);"
+
+                # Sets the comment
+                elif property_name == "comment":
+                    self.js_script += f"{layer.js_variable_name}.comment.setValueAtTime({property_time}, " \
+                                      f"'{property_value}');"
+
+                # Sets the label
+                elif property_name == "label":
+                    self.js_script += f"{layer.js_variable_name}.label.setValueAtTime({property_time}," \
+                                      f"'{property_value}');"
+
+                # Sets if shy
+                elif property_name == "shy":
+                    if property_value:
+                        self.js_script += f"{layer.js_variable_name}.shy.setValueAtTime({property_time},true);"
+                    else:
+                        self.js_script += f"{layer.js_variable_name}.shy.setValueAtTime({property_time},false);"
+
+                # Sets if solo
+                elif property_name == "solo":
+                    if property_value:
+                        self.js_script += f"{layer.js_variable_name}.solo.setValueAtTime({property_time},true);"
+                    else:
+                        self.js_script += f"{layer.js_variable_name}.solo.setValueAtTime({property_time},false);"
+
+                # Sets the stretch
+                # elif property_name == "stretch":
+                #     self.js_script += f""
+
     """
      Compile the comps to javascript for after effects. The variable name is hashed to prevent doubling 
     """
     def __create_comp__(self, comp: Comp):
-        self.js_script += f"var {comp.js_variable_name} = app.project.items.addComp('{comp.name}', {comp.width}, {comp.height}, {comp.pixel_aspect}, {comp.duration}, {comp.framerate});"
+        self.js_script += f"var {comp.js_variable_name} = app.project.items.addComp('{comp.name}', {comp.width}, " \
+                          f"{comp.height}, {comp.pixel_aspect}, {comp.duration}, {comp.framerate});"
 
     def compile(self):
         for comp in self.comp_list:
