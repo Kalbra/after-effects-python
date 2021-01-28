@@ -31,8 +31,6 @@ color_property.setValueAtTime(4, Color("yellow"))
 color_property.setValueAtTime(5, Color("white"))
 
 
-
-
 layer = TextLayer(name="Hello", font_family="Calibri", font_color=Color("blue"), font_size=40, position=position_property)
 
 composition.addLayer(SolidLayer(name="sir", label=2, locked=True, comment="This is a comment", color=Color("blue")))
