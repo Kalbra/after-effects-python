@@ -31,9 +31,9 @@ color_property.setValueAtTime(4, Color("yellow"))
 color_property.setValueAtTime(5, Color("white"))
 
 
-layer = TextLayer(name="Hello", rotation=300,font_family="Calibri", font_color=color_property, font_size=40, position=position_property)
+layer = TextLayer(name="Hello", rotation=300,font_family="Calibri", font_color=Color("blue"), font_size=40, position=position_property)
 
-composition.addLayer(SolidLayer(name="sir", label=2, comment="This is a comment", color=Color("blue")))
+composition.addLayer(SolidLayer(name="sir", label=2, comment="This is a comment", color=color_property))
 composition.addLayer(layer)
 
 after_effects_script.addComp(composition)

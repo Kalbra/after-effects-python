@@ -79,7 +79,8 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – A string containing the name of the solid.</p></li>
-<li><p><strong>position</strong> – The position of the layer(on the top left corner). Needs array in following style: [x, y, z]</p></li>
+<li><p><strong>position</strong> – The position of the layer. Needs array in following style: [x, y, z]</p></li>
+<li><p><strong>rotation</strong> – The rotation of the layer. Needs array in following style: [x, y, z]</p></li>
 <li><p><strong>comment</strong> – A descriptive comment for the layer.</p></li>
 <li><p><strong>label</strong> – The label color for the item. Colors are represented by their number (0 for None, or 1 to 16 for
 one of the preset colors in the Labels preferences).</p></li>
@@ -106,7 +107,7 @@ between 0 and 1 are set to 1, and values between -1 and 0 (not including 0) are 
 <dl class="py class">
 <dt id="ae_python.layer.camera_layer.CameraLayer">
 <em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.camera_layer.</code><code class="sig-name descname">CameraLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/camera_layer.html#CameraLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.camera_layer.CameraLayer" title="Permalink to this definition">¶</a></dt>
-<dd><p>The CameraLayer object represents a camera layer within a composition.</p>
+<dd><p>The Camera layer object represents a camera layer within a composition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -130,8 +131,8 @@ initial x and y values of the new camera’s Point of Interest property. The z v
 <div class="section" id="module-ae_python.layer.shape_layer">
 <span id="shape-layer"></span><h1>Shape layer<a class="headerlink" href="#module-ae_python.layer.shape_layer" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="ae_python.layer.shape_layer.TextLayer">
-<em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.shape_layer.</code><code class="sig-name descname">TextLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/shape_layer.html#TextLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.shape_layer.TextLayer" title="Permalink to this definition">¶</a></dt>
+<dt id="ae_python.layer.shape_layer.ShapeLayer">
+<em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.shape_layer.</code><code class="sig-name descname">ShapeLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/shape_layer.html#ShapeLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.shape_layer.ShapeLayer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -140,7 +141,16 @@ initial x and y values of the new camera’s Point of Interest property. The z v
 <dl class="py class">
 <dt id="ae_python.layer.solid_layer.SolidLayer">
 <em class="property">class </em><code class="sig-prename descclassname">ae_python.layer.solid_layer.</code><code class="sig-name descname">SolidLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="modules/ae_python/layer/solid_layer.html#SolidLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ae_python.layer.solid_layer.SolidLayer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The solid layer class, you can create a solid plane with it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>color</strong> – The color of the plane.</p></li>
+<li><p><strong>pixel_aspect</strong> – The pixel_aspect of the solid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-ae_python.layer.text_layer">

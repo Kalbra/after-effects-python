@@ -24,7 +24,6 @@ class Compiler:
                               f"{layer.getProperty('color').default_value.blue}], '{layer.getProperty('name')}'," \
                               f" {comp.width}, {comp.height},1);"
 
-
         # JS script for null layer.
         elif type(layer) == NullLayer:
             self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addNull();"
