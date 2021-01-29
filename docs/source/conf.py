@@ -22,7 +22,7 @@ copyright = '2021, Kalle Bracht'
 author = 'Kalle Bracht'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.0'
+release = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -56,6 +56,6 @@ exclude_patterns = []
 #
 html_theme = "insegel"
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
+
+# The project logo
+html_logo = "../logos/logo.png"

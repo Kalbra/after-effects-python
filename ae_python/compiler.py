@@ -44,6 +44,7 @@ class Compiler:
                               f"{layer.getProperty('font_color').default_value.blue}];{layer.js_text_variable_name}" \
                               f".font = '{layer.getProperty('font_family')}';"
 
+            # @TODO: This do not work
             for value in self.__property_decoder__(layer.getProperty("font_color")):
                 self.js_script += f"{layer.js_text_variable_name}.fillColor.setValueAtTime({value[0]}, [{value[1].red},{value[1].green},{value[1].blue}]);"
 
