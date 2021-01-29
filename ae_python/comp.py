@@ -28,7 +28,7 @@ class Comp:
         self.layers = []
 
         # The variable name in javascript. The name is hashed.
-        self.js_variable_name:str  = hash_maker()
+        self.js_variable_name: str = hash_maker()
 
         # Sets the middle point of the comp. It is a position, so [x,y].
         self.middle: int = [self.width/2, self.height/2]

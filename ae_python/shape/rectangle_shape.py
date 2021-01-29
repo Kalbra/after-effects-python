@@ -13,4 +13,4 @@ class Rectangle(Shape):
         super().__init__(*args, **kwargs)
 
         self.properties.append(["size", Property(kwargs.get("size", [100, 100]))])
-        self.properties.append(["roundness", Property(kwargs.get("roundness"), 0)])
+        self.properties.append(["roundness", Property(kwargs.get("roundness", 0))])

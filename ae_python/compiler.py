@@ -3,6 +3,10 @@ from ae_python.layer.solid_layer import SolidLayer
 from ae_python.layer.null_layer import NullLayer
 from ae_python.layer.camera_layer import CameraLayer
 from ae_python.layer.text_layer import TextLayer
+from ae_python.layer.shape_layer import ShapeLayer
+from ae_python.shape.rectangle_shape import Rectangle
+from ae_python.shape.ellipse_shape import Ellipse
+from ae_python.shape.path_shape import Path
 from ae_python.property import *
 
 class Compiler:
@@ -49,6 +53,27 @@ class Compiler:
                 self.js_script += f"{layer.js_text_variable_name}.fillColor.setValueAtTime({value[0]}, [{value[1].red},{value[1].green},{value[1].blue}]);"
 
             self.js_script += f"{layer.js_variable_name}.text.sourceText.setValue({layer.js_text_variable_name});"
+
+        # JS script for shape layer.
+        elif type(layer) == ShapeLayer:
+            self.js_script += f"var {layer.js_variable_name} = {comp.js_variable_name}.layers.addShape();"
+
+            for shape in layer.shapes:
+                # Defines the group and shape
+                self.js_script += f"var {shape.js_variable_name} = {layer.js_variable_name}.property('ADBE Root " \
+                                  f"Vectors Group').addProperty('ADBE Vector Group').property('ADBE Vectors Group');"
+
+                # Set the rectangle
+                if type(shape) == Rectangle:
+                    self.js_script += f"{shape.js_variable_name}.addProperty('ADBE Vector Shape - Rect');"
+
+                # Sets the fill color
+                # @TODO: Add opacity and stroke to the script
+                self.js_script += f"{shape.js_variable_name}.addProperty('ADBE Vector Graphic - Fill').property" \
+                                  f"('ADBE Vector Fill Color').setValue([" \
+                                  f"{shape.getProperty('color').default_value.red}," \
+                                  f"{shape.getProperty('color').default_value.green}," \
+                                  f"{shape.getProperty('color').default_value.blue}]);"
 
         else:
             raise ValueError("Class type is not in compiler list.")

@@ -2,8 +2,16 @@ from ae_python.shape.shape import Shape
 from typing import List
 
 class Path(Shape):
+    """
+    :parameter points: Set the point and tangents in the following format:
+                       [ [ [point], [in], [out] ], [ [point], [in], [out] ] ]
+    :parameter closed: When true, the first and last vertices are connected to form a closed curve. When false, the
+                       closing segment is not drawn.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.closed = kwargs.get("closed", False)
 
         self.vertices: List[int]     = kwargs.get("points", [[], [], []])[0]
         self.in_tangents: List[int]  = kwargs.get("points", [[], [], []])[1]

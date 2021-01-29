@@ -9,7 +9,10 @@ after_effects_script = AEScript()
 composition = Comp(name="Shape", comment="The Shape example of ae-python")
 
 shape_layer = ShapeLayer()
-
 shape_layer.addShape(Rectangle(color=Color("green"), size=[200, 200], roundness=40))
 
+composition.addLayer(shape_layer)
+
 after_effects_script.addComp(composition)
+
+after_effects_script.compile()
