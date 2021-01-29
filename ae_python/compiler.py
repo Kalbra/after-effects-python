@@ -67,6 +67,10 @@ class Compiler:
                 if type(shape) == Rectangle:
                     self.js_script += f"{shape.js_variable_name}.addProperty('ADBE Vector Shape - Rect');"
 
+                # Set the ellipse
+                elif type(shape) == Ellipse:
+                    self.js_script += f"{shape.js_variable_name}.addProperty('ADBE Vector Shape - Ellipse')"
+
                 # Sets the fill color
                 # @TODO: Add opacity and stroke to the script
                 self.js_script += f"{shape.js_variable_name}.addProperty('ADBE Vector Graphic - Fill').property" \
